@@ -1,0 +1,11 @@
+# Added by cargo
+
+/target
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# --- IDEs & Editors ---
+# VS Code
+.vscode/
