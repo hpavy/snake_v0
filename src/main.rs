@@ -1,9 +1,13 @@
 mod ui;
+mod snake;
+use crate::snake::Snake;
+use std::collections::VecDeque; 
 
 fn main() {
-    let head = (4, 4);
-    let apple = (9, 7);
-    let body = vec![(4, 5), (4, 6), (5, 6)];
+    let apple = (9, 4);
+    let snake = Snake{
+        body:VecDeque::from(vec![(4, 4), (4, 5), (4, 6), (5, 6)])
+    };
 
-    ui::display_game(&head, &apple, &body);
+    ui::display_game(&snake, &apple);
 }
