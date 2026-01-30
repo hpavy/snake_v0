@@ -1,14 +1,15 @@
 use crate::snake::Snake;
+use crate::snake::Point;
 
 pub fn display_game(
     snake: &Snake,
-    apple_position: &(i16, i16),
+    apple_position: &Point,
 ){
     let head_pos = snake.body[0];
     let mut string_to_show = String::from("");
     for y in 0..15{
         for x in 0..15 {
-            let current_pos = (x, y);
+            let current_pos = Point {x: x, y: y};
             if head_pos == current_pos{
                 string_to_show.push_str("\x1b[32mS \x1b[0m");
             } else if *apple_position == current_pos{
