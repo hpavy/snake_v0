@@ -2,13 +2,24 @@ use std::collections::VecDeque;
 use std::ops::Add;
 
 
-// #[derive(Debug, PartialEq, Copy, Clone)]
-// pub enum Direction {
-//     Up,
-//     Left,
-//     Right,
-//     Down,
-// }
+#[derive(Debug, PartialEq, Copy, Clone)]
+pub enum Direction {
+    Up,
+    Left,
+    Right,
+    Down,
+}
+
+impl Direction {
+    pub fn give_new_position(&self) -> Point{
+        match self {
+            Direction::Up => Point{x: 0, y: -1},
+            Direction::Right => Point{x: 1, y: 0},
+            Direction::Left => Point{x: -1, y: 0},
+            Direction::Down => Point{x: 0, y: 1}
+        }
+    }
+}
 
 
 
@@ -33,11 +44,13 @@ impl Add for Point {
 
 pub struct Snake {
     pub body: VecDeque<Point>,
-    // pub direction:Direction
+    pub direction:Direction
 }
 
-// impl Snake {
-//     fn take_one_step(&self){
-        
-//     }
-// }
+impl Snake {
+    fn take_one_step(&mut self){
+        let new_head_position = self.body[0] + self.direction.give_new_position();
+        self.body.push_front(new_head_position);
+        self.body.pop_back();
+    }
+}
