@@ -48,9 +48,14 @@ pub struct Snake {
 }
 
 impl Snake {
-    fn take_one_step(&mut self){
+    pub fn take_one_step(&mut self){
         let new_head_position = self.body[0] + self.direction.give_new_position();
         self.body.push_front(new_head_position);
         self.body.pop_back();
     }
 }
+/* 
+pub struct Game {
+    pub snake: Snake,
+    pub apple: Point
+} */

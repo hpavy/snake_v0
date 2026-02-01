@@ -1,5 +1,7 @@
 use crate::snake::Snake;
 use crate::snake::Point;
+use std::io::{stdout, Write};
+use crossterm::{ExecutableCommand, cursor::MoveTo};
 
 pub fn display_game(
     snake: &Snake,
@@ -20,13 +22,15 @@ pub fn display_game(
                 string_to_show.push_str("# ");
             }
         }
-        string_to_show.push('\n');
+        string_to_show.push_str("\r\n");
     }
     clean_and_display_terminal(string_to_show);
 } 
 
 
 fn clean_and_display_terminal(string_to_show: String) {
-    // print!("\x1b[H");
+    let mut out = stdout();
+    out.execute(MoveTo(0, 0)).unwrap();
     println!("{}", string_to_show);
+    out.flush().unwrap();
 }
