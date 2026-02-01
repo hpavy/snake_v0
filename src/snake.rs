@@ -44,18 +44,24 @@ impl Add for Point {
 
 pub struct Snake {
     pub body: VecDeque<Point>,
-    pub direction:Direction
 }
 
 impl Snake {
-    pub fn take_one_step(&mut self){
-        let new_head_position = self.body[0] + self.direction.give_new_position();
+    pub fn take_one_step(&mut self, direction: Direction){
+        let new_head_position = self.body[0] + direction.give_new_position();
         self.body.push_front(new_head_position);
         self.body.pop_back();
     }
 }
-/* 
+
 pub struct Game {
     pub snake: Snake,
-    pub apple: Point
-} */
+    pub direction: Direction,
+    pub apple: Point,
+}
+
+impl Game {
+    pub fn take_one_step(&mut self) {
+        self.snake.take_one_step(self.direction)
+    }
+}
