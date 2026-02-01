@@ -47,10 +47,12 @@ pub struct Snake {
 }
 
 impl Snake {
-    pub fn take_one_step(&mut self, direction: Direction){
+    pub fn take_one_step(&mut self, direction: Direction, apple_eaten: bool){
         let new_head_position = self.body[0] + direction.give_new_position();
         self.body.push_front(new_head_position);
-        self.body.pop_back();
+        if !apple_eaten{
+            self.body.pop_back();
+        } 
     }
 }
 
@@ -61,7 +63,18 @@ pub struct Game {
 }
 
 impl Game {
+    
     pub fn take_one_step(&mut self) {
-        self.snake.take_one_step(self.direction)
+        let apple_eaten = self.check_apple_eaten();
+        self.snake.take_one_step(self.direction, apple_eaten);
+    }
+    
+    fn check_apple_eaten(&self) -> bool {
+        if self.apple == self.snake.body[0] {    
+            // mettre ici le choix de la nouvelle pomme.
+            true
+        } else {
+            false
+        }
     }
 }
