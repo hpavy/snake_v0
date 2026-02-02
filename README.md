@@ -12,4 +12,10 @@ TO DO:
 
 Ideas:
 
-Ca serait bien de faire un test pour one_step à la fin. 
+- Ca serait bien de faire un test pour one_step à la fin. 
+
+- Faire un test pour toutes les fonctionnalités de main.rs
+
+- Ensuite essayer de faire que la pomme puisse apparaitre de manière aléatoire
+
+- Il faut que la taille du jeu soit fixé aussi. Le mettre en argument de Game

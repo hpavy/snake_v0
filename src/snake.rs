@@ -1,5 +1,6 @@
 use std::collections::VecDeque;
 use std::ops::Add;
+use rand::Rng;
 
 
 #[derive(Debug, PartialEq, Copy, Clone)]
@@ -57,21 +58,24 @@ impl Snake {
 }
 
 pub struct Game {
+    pub size_game: i16,
     pub snake: Snake,
     pub direction: Direction,
     pub apple: Point,
 }
 
 impl Game {
-    
     pub fn take_one_step(&mut self) {
         let apple_eaten = self.check_apple_eaten();
         self.snake.take_one_step(self.direction, apple_eaten);
     }
     
-    fn check_apple_eaten(&self) -> bool {
+    fn check_apple_eaten(&mut self) -> bool {
         if self.apple == self.snake.body[0] {    
-            // mettre ici le choix de la nouvelle pomme.
+            let mut rng = rand::thread_rng();
+            self.apple = Point{
+                x: rng.gen_range(0..self.size_game), y: rng.gen_range(0..self.size_game)
+            };
             true
         } else {
             false

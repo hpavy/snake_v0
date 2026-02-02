@@ -18,9 +18,10 @@ fn main() {
             ]),
         };
     let mut game = Game{
+        size_game: 9,
         snake: snake,
         direction: Direction::Up,
-        apple: Point {x: 9, y: 4} 
+        apple: Point {x: 3, y: 4} 
     };
     
     enable_raw_mode().unwrap();
@@ -42,8 +43,8 @@ fn main() {
 
         game.take_one_step();
 
-        ui::display_game(&game.snake, &game.apple);
-        thread::sleep(Duration::from_millis(700))
+        ui::display_game(&game.size_game, &game.snake, &game.apple);
+        thread::sleep(Duration::from_millis(300))
     }
     disable_raw_mode().unwrap();
     stdout().execute(Show).unwrap();

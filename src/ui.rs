@@ -4,13 +4,14 @@ use std::io::{stdout, Write};
 use crossterm::{ExecutableCommand, cursor::MoveTo};
 
 pub fn display_game(
+    size_game: &i16,
     snake: &Snake,
     apple_position: &Point,
 ){
     let head_pos = snake.body[0];
     let mut string_to_show = String::from("");
-    for y in 0..15{
-        for x in 0..15 {
+    for y in 0..*size_game {
+        for x in 0..*size_game {
             let current_pos = Point {x: x, y: y};
             if head_pos == current_pos{
                 string_to_show.push_str("\x1b[32mS \x1b[0m");
