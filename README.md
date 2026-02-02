@@ -24,3 +24,4 @@ Ideas:
 
 - Check que le serpent meurt
 
+- Problème avec la pomme qui peut spawn sur le serpent

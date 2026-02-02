@@ -62,14 +62,25 @@ pub struct Game {
     pub snake: Snake,
     pub direction: Direction,
     pub apple: Point,
+    pub running_game: bool,
 }
 
 impl Game {
     pub fn take_one_step(&mut self) {
         let apple_eaten = self.check_apple_eaten();
         self.snake.take_one_step(self.direction, apple_eaten);
+        self.check_game_is_running();
     }
     
+    fn check_game_is_running(&mut self){
+        let head_snake = self.snake.body[0];
+        let is_too_small = (head_snake.x < 0) || (head_snake.y < 0);
+        let is_too_big = (head_snake.x >= self.size_game) || (head_snake.y >= self.size_game);
+        if is_too_big || is_too_small {
+            self.running_game = false;
+        }
+    }
+
     fn check_apple_eaten(&mut self) -> bool {
         if self.apple == self.snake.body[0] {    
             let mut rng = rand::thread_rng();

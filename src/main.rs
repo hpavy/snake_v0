@@ -21,14 +21,14 @@ fn main() {
         size_game: 9,
         snake: snake,
         direction: Direction::Up,
-        apple: Point {x: 3, y: 4} 
+        apple: Point {x: 3, y: 4},
+        running_game: true 
     };
     
     enable_raw_mode().unwrap();
     stdout().execute(Hide).unwrap();
     print!("\x1b[2J"); 
-    let mut running_game = true;
-    while running_game {
+    while game.running_game {
         if event::poll(Duration::from_millis(1)).unwrap() {
             if let Event::Key(key_event) = event::read().unwrap() {
                 match key_event.code {
@@ -36,7 +36,7 @@ fn main() {
                     KeyCode::Char('s') => game.direction = Direction::Down,
                     KeyCode::Char('q') => game.direction = Direction::Left,
                     KeyCode::Char('d') => game.direction = Direction::Right,
-                    KeyCode::Esc => running_game = false,
+                    KeyCode::Esc => game.running_game = false,
                     _ => ()
                 }
             }
