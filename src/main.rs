@@ -27,7 +27,8 @@ fn main() {
     enable_raw_mode().unwrap();
     stdout().execute(Hide).unwrap();
     print!("\x1b[2J"); 
-    loop {
+    let mut running_game = true;
+    while running_game {
         if event::poll(Duration::from_millis(1)).unwrap() {
             if let Event::Key(key_event) = event::read().unwrap() {
                 match key_event.code {
@@ -35,7 +36,7 @@ fn main() {
                     KeyCode::Char('s') => game.direction = Direction::Down,
                     KeyCode::Char('q') => game.direction = Direction::Left,
                     KeyCode::Char('d') => game.direction = Direction::Right,
-                    KeyCode::Esc => break,
+                    KeyCode::Esc => running_game = false,
                     _ => ()
                 }
             }
@@ -48,4 +49,5 @@ fn main() {
     }
     disable_raw_mode().unwrap();
     stdout().execute(Show).unwrap();
+    println!("Game Over")
 }

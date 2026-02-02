@@ -19,3 +19,8 @@ Ideas:
 - Ensuite essayer de faire que la pomme puisse apparaitre de manière aléatoire
 
 - Il faut que la taille du jeu soit fixé aussi. Le mettre en argument de Game
+
+- Faire une méthode new pour créer une game
+
+- Check que le serpent meurt
+
