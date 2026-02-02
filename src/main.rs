@@ -49,5 +49,5 @@ fn main() {
     }
     disable_raw_mode().unwrap();
     stdout().execute(Show).unwrap();
-    println!("Game Over")
+    println!("Game Over your score is: {}", game.snake.body.len() - 2)
 }

@@ -76,20 +76,45 @@ impl Game {
         let head_snake = self.snake.body[0];
         let is_too_small = (head_snake.x < 0) || (head_snake.y < 0);
         let is_too_big = (head_snake.x >= self.size_game) || (head_snake.y >= self.size_game);
-        if is_too_big || is_too_small {
+        let mut is_head_touching_body = false;
+        for point in self.snake.body.iter().skip(1) {
+            if *point == head_snake {
+                is_head_touching_body = true;
+            }
+        } 
+        if is_too_big || is_too_small || is_head_touching_body{
             self.running_game = false;
         }
     }
 
     fn check_apple_eaten(&mut self) -> bool {
         if self.apple == self.snake.body[0] {    
-            let mut rng = rand::thread_rng();
-            self.apple = Point{
-                x: rng.gen_range(0..self.size_game), y: rng.gen_range(0..self.size_game)
-            };
+            self.get_new_apple();
             true
         } else {
             false
         }
+    }
+    
+    fn get_new_apple(&mut self) {
+        let mut rng = rand::thread_rng();
+        let mut find_new_apple = false;
+        let mut potential_apple = Point { x: 0, y: 0};
+        while !find_new_apple{
+            potential_apple = Point{
+                x: rng.gen_range(0..self.size_game), y: rng.gen_range(0..self.size_game)
+            };
+            find_new_apple = self.is_position_free(&potential_apple);
+        }
+        self.apple = potential_apple;
+    }
+    
+    fn is_position_free(&self, potential_apple: &Point) -> bool{
+        for point in self.snake.body.iter() {
+            if *potential_apple == *point {
+                return false
+            }
+        }
+        true
     }
 }

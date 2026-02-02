@@ -12,16 +12,16 @@ TO DO:
 
 Ideas:
 
-- Ca serait bien de faire un test pour one_step à la fin. 
+- [ ] Ca serait bien de faire un test pour one_step à la fin. 
 
-- Faire un test pour toutes les fonctionnalités de main.rs
+- [ ] Faire un test pour toutes les fonctionnalités de main.rs
 
-- Ensuite essayer de faire que la pomme puisse apparaitre de manière aléatoire
+- [X] Ensuite essayer de faire que la pomme puisse apparaitre de manière aléatoire
 
-- Il faut que la taille du jeu soit fixé aussi. Le mettre en argument de Game
+- [X] Il faut que la taille du jeu soit fixé aussi. Le mettre en argument de Game
 
-- Faire une méthode new pour créer une game
+- [ ] Faire une méthode new pour créer une game
 
-- Check que le serpent meurt
+- [X] Check que le serpent meurt
 
-- Problème avec la pomme qui peut spawn sur le serpent
+- [ ] Problème avec la pomme qui peut spawn sur le serpent
