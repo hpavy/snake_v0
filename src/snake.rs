@@ -66,6 +66,33 @@ pub struct Game {
 }
 
 impl Game {
+
+    pub fn new(size_game: i16) -> Self {
+        let (snake, direction) = Self::get_random_snake(&size_game);
+        let mut game = Game {
+            size_game, snake, direction, apple: Point { x: 0, y: 0 }, running_game: true
+        };
+        game.get_new_apple();
+        game
+    }
+
+
+    fn get_random_snake (size_game: &i16) -> (Snake, Direction) {
+        let mut rng = rand::thread_rng();
+        let random_val = rng.gen_range(0..4);
+        let head = Point{
+                x: rng.gen_range(0..size_game - 3), y: rng.gen_range(0..size_game - 3)
+            };
+        let (direction, tail) = match random_val {
+            0 => (Direction::Up, Point {x: head.x, y: head.y + 1}),
+            1 => (Direction::Down, Point {x: head.x, y: head.y - 1}),
+            2 => (Direction::Right, Point {x: head.x - 1, y: head.y}),
+            _ => (Direction::Left, Point {x: head.x + 1, y: head.y})
+        };
+        let snake = Snake{ body: VecDeque::from([head, tail])};
+        (snake, direction)
+    }
+
     pub fn take_one_step(&mut self) {
         let apple_eaten = self.check_apple_eaten();
         self.snake.take_one_step(self.direction, apple_eaten);
@@ -98,13 +125,14 @@ impl Game {
     
     fn get_new_apple(&mut self) {
         let mut rng = rand::thread_rng();
-        let mut find_new_apple = false;
-        let mut potential_apple = Point { x: 0, y: 0};
-        while !find_new_apple{
+        let mut potential_apple: Point;
+        loop{
             potential_apple = Point{
                 x: rng.gen_range(0..self.size_game), y: rng.gen_range(0..self.size_game)
             };
-            find_new_apple = self.is_position_free(&potential_apple);
+            if self.is_position_free(&potential_apple) {
+                break
+            }
         }
         self.apple = potential_apple;
     }

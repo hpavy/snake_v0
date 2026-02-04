@@ -22,6 +22,8 @@ Ideas:
 
 - [ ] Faire une méthode new pour créer une game
 
+- [ ] Optimiser un peu plus les recherches
+
 - [X] Check que le serpent meurt
 
-- [ ] Problème avec la pomme qui peut spawn sur le serpent
+- [X] Problème avec la pomme qui peut spawn sur le serpent

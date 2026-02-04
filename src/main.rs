@@ -2,8 +2,7 @@ mod ui;
 mod snake;
 use std::thread;
 use std::time::Duration;
-use crate::snake::{Snake, Point, Direction, Game};
-use std::collections::VecDeque; 
+use crate::snake::{Direction, Game};
 use crossterm::event::{self, Event, KeyCode};
 use crossterm::terminal::{enable_raw_mode, disable_raw_mode};
 use crossterm::cursor::{Hide, Show};
@@ -11,19 +10,7 @@ use std::io::stdout;
 use crossterm::ExecutableCommand;
 
 fn main() {
-    let snake = Snake{
-        body:VecDeque::from([
-            Point{x: 4, y: 4},
-            Point{x: 4, y: 5},
-            ]),
-        };
-    let mut game = Game{
-        size_game: 9,
-        snake: snake,
-        direction: Direction::Up,
-        apple: Point {x: 3, y: 4},
-        running_game: true 
-    };
+    let mut game = Game::new(9);
     
     enable_raw_mode().unwrap();
     stdout().execute(Hide).unwrap();
