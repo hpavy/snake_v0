@@ -103,12 +103,9 @@ impl Game {
         let head_snake = self.snake.body[0];
         let is_too_small = (head_snake.x < 0) || (head_snake.y < 0);
         let is_too_big = (head_snake.x >= self.size_game) || (head_snake.y >= self.size_game);
-        let mut is_head_touching_body = false;
-        for point in self.snake.body.iter().skip(1) {
-            if *point == head_snake {
-                is_head_touching_body = true;
-            }
-        } 
+        let mut is_head_touching_body = self.snake.body.iter().skip(1).any(
+            |point| *point == head_snake
+        );
         if is_too_big || is_too_small || is_head_touching_body{
             self.running_game = false;
         }
